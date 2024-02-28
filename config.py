@@ -29,7 +29,7 @@ Push_cycle = 1800
 Auto_select = False
 
 # 是否校外访问
-WebVpn_Flag = True
+WebVpn_Flag = False
 
 # 校公选课类别,如有需要,按以下表格填写
 Class_Subject = 0

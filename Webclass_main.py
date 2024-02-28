@@ -144,13 +144,13 @@ if __name__ == '__main__':
             web.find_element(by=By.XPATH, value='//*[@id="username"]').send_keys(ACCOUNT)
             web.find_element(by=By.XPATH, value='//*[@id="password"]').send_keys(PASSWORD, Keys.ENTER)
             time.sleep(1)
+            web.find_element(by=By.XPATH, value='//*[@id="group-8"]/div[2]/div').click()
+            web.switch_to.window(web.window_handles[-1])
         else:
             web.get('https://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/index.do')
         print(f"[INFO]|{current_time()}|当前登录信息如下")
         print(f"[INFO]|{current_time()}|用户:{blue(ACCOUNT)}")
         print(f"[INFO]|{current_time()}|密码:{blue(PASSWORD)}")
-        web.find_element(by=By.XPATH, value='//*[@id="group-8"]/div[2]/div').click()
-        web.switch_to.window(web.window_handles[-1])
         web.find_element(by=By.XPATH, value='//*[@id="loginName"]').send_keys(ACCOUNT)
         web.find_element(by=By.XPATH, value='//*[@id="loginPwd"]').send_keys(PASSWORD)
         pic_id = None
