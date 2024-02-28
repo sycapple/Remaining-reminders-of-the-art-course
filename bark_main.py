@@ -165,4 +165,4 @@ if __name__ == '__main__':
             requests.get(f"https://api.day.app/{bark_api}/课程提醒/当前无课程")
         print(f"[INFO]|{current_time()}|已推送课程 {blue(' '.join(class_names))}")
         web.quit()
-        time.sleep(1800)
+        time.sleep(Push_cycle)

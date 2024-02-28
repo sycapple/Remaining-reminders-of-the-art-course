@@ -15,7 +15,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
 
-from config import *
+from config_test import *
+
 
 def sender(title, content):
     global send_method
@@ -180,21 +181,28 @@ if __name__ == '__main__':
         web.find_element(by=By.XPATH, value='//*[@id="aPublicCourse"]').click()
         web.find_element(by=By.XPATH, value='//*[@id="public_sfct"]/option[3]').click()
         web.find_element(by=By.XPATH, value='//*[@id="public_sfym"]/option[3]').click()
-        # web.find_element(by=By.XPATH, value='//*[@id="public_xgxklb"]/option[3]').click()
+        web.find_element(by=By.XPATH, value=f'//*[@id="public_xgxklb"]/option[{Class_Subject + 1}]').click()
         web.find_element(by=By.XPATH, value='//*[@id="publicSearch"]').send_keys(className, Keys.ENTER)
         time.sleep(1)
-        divs = web.find_elements(by=By.XPATH, value='//*[@id="publicBody"]/div')
-        time.sleep(0.5)
+        total_page = eval(web.find_element(by=By.XPATH, value='//*[@id="publicTotalPage"]').text)
+        now_page = eval(web.find_element(by=By.XPATH, value='//*[@id="publicPageNumber"]').text)
         class_names = []
-        try:
-            for div in divs:
-                class_name = div.text
-                class_name = class_name.split('\n')[3]
-                class_names.append(class_name)
-            sender(f"课程提醒", f"{' '.join(class_names)}")
-        except:
+        if total_page == 0:
             sender("课程提醒", "当前无课程")
             class_names.append("当前无课程")
-        print(f"[INFO]|{current_time()}|已推送课程 {blue(' '.join(class_names))}")
+        else:
+            while now_page <= total_page:
+                divs = web.find_elements(by=By.XPATH, value='//*[@id="publicBody"]/div')
+                for div in divs:
+                    try:
+                        class_name = div.text
+                        class_name = class_name.split('\n')[3]
+                        class_names.append(class_name)
+                    except:
+                        pass
+                web.find_element(by=By.XPATH, value='//*[@id="publicDown"]').click()
+                now_page += 1
+            sender(f"课程提醒", f"{' '.join(class_names)}")
+        print(f"[INFO]|{current_time()}|已推送 {blue(' '.join(class_names))}")
         web.quit()
-        time.sleep(1800)
+        time.sleep(Push_cycle)
