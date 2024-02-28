@@ -15,9 +15,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
 
-my_sender = ''  # 填写发信人的邮箱账号
-my_pass = ''  # 发件人邮箱授权码
-my_user = ''  # 收件人邮箱账号
+from config import *
 
 
 def mail(title, content):
@@ -111,15 +109,6 @@ def current_time():
 
 if __name__ == '__main__':
     while True:
-        # 账号配置区域
-        # 校园网账号和密码
-        ACCOUNT = ''
-        PASSWORD = ''
-        # 超级鹰第三方验证码识别平台账号密码和密钥
-        verify_code_ACCOUNT = ''
-        verify_code_PASSWORD = ''
-        soft_id = ''
-
         print(f"[INFO]|{current_time()}|欢迎来到课程搜集系统")
         print(f"[INFO]|{current_time()}|正在准备程序")
 

@@ -11,6 +11,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 import requests
 from hashlib import md5
 
+from config import *
+
 
 class Chaojiying_Client(object):
 
@@ -86,17 +88,6 @@ def current_time():
 
 if __name__ == '__main__':
     while True:
-        # 账号配置区域
-        # 校园网账号和密码
-        ACCOUNT = ''
-        PASSWORD = ''
-        # 超级鹰第三方验证码识别平台账号密码和密钥
-        verify_code_ACCOUNT = ''
-        verify_code_PASSWORD = ''
-        soft_id = ''
-        # 苹果推送软件barkapi
-        bark_api = ''
-
         print(f"[INFO]|{current_time()}|欢迎来到课程搜集系统")
         print(f"[INFO]|{current_time()}|正在准备程序")
 
