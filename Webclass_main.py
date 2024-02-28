@@ -15,7 +15,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
 
-from config_test import *
+from config import *
 
 
 def sender(title, content):
