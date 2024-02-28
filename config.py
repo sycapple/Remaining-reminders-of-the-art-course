@@ -25,6 +25,9 @@ className = ''
 # 隔多少时间推送一次,单位是秒
 Push_cycle = 1800
 
+# 是否直接代选课程
+Auto_select = False
+
 # 校公选课类别,如有需要,按以下表格填写
 Class_Subject = 0
 '''

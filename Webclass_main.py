@@ -197,6 +197,12 @@ if __name__ == '__main__':
                     try:
                         class_name = div.text
                         class_name = class_name.split('\n')[3]
+                        if Auto_select == True:
+                            web.find_element(by=By.XPATH, value='/div[11]/a').click()
+                            web.find_element(by=By.XPATH, value='//*[@id="cvDialog"]/div[2]/div[2]/div[1]').click()
+                            print(f"[INFO]|{current_time()}|已选择 {blue(class_name)}")
+                            sender(f"课程提醒", f"已选择{class_name}")
+                            exit()
                         class_names.append(class_name)
                     except:
                         pass
