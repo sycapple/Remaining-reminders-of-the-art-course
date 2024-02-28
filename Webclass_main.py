@@ -137,16 +137,18 @@ if __name__ == '__main__':
         web.execute_cdp_cmd("Emulation.setUserAgentOverride", {
             "userAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0"
         })
-        web.get('https://webvpn.bit.edu.cn/')
+        if WebVpn_Flag:
+            web.get('https://webvpn.bit.edu.cn/')
+            print(f"[INFO]|{current_time()}|登录一体化认证")
+            print(f"[INFO]|{current_time()}|进入选课网站")
+            web.find_element(by=By.XPATH, value='//*[@id="username"]').send_keys(ACCOUNT)
+            web.find_element(by=By.XPATH, value='//*[@id="password"]').send_keys(PASSWORD, Keys.ENTER)
+            time.sleep(1)
+        else:
+            web.get('https://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/index.do')
         print(f"[INFO]|{current_time()}|当前登录信息如下")
         print(f"[INFO]|{current_time()}|用户:{blue(ACCOUNT)}")
         print(f"[INFO]|{current_time()}|密码:{blue(PASSWORD)}")
-        start_time = time.time()
-        print(f"[INFO]|{current_time()}|登录一体化认证")
-        web.find_element(by=By.XPATH, value='//*[@id="username"]').send_keys(ACCOUNT)
-        web.find_element(by=By.XPATH, value='//*[@id="password"]').send_keys(PASSWORD, Keys.ENTER)
-        time.sleep(1)
-        print(f"[INFO]|{current_time()}|进入选课网站")
         web.find_element(by=By.XPATH, value='//*[@id="group-8"]/div[2]/div').click()
         web.switch_to.window(web.window_handles[-1])
         web.find_element(by=By.XPATH, value='//*[@id="loginName"]').send_keys(ACCOUNT)
