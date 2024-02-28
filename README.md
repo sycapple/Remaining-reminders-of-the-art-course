@@ -68,7 +68,7 @@
 * `className`：预检索名称，选填
 * `Push_cycle`：推送间隔，必填
 * `Class_Subject`：公选课类别，选填
-* `WebVpn_Flag`：是否校内访问
+* `WebVpn_Flag`：是否校外访问
 * `Auto_select`：是否自动选课(慎重选择，否则满足条件的都给你选上了)
 
 ## 6. 项目运行
