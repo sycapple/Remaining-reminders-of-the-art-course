@@ -103,8 +103,10 @@ class Chaojiying_Client(object):
         r = requests.post('http://upload.chaojiying.net/Upload/ReportError.php', data=params, headers=self.headers)
         return r.json()
 
-def align_center(text):
+
+def align_center(text=''):
     return "{:—^50}".format(text)
+
 
 def red(text):
     return '\033[31m{}\033[0m'.format(text)
@@ -144,7 +146,8 @@ if __name__ == '__main__':
     print(f"[INFO]|{current_time()}|WebVpn_Flag: {blue(WebVpn_Flag)}")
     print(f"[INFO]|{current_time()}|Activation_Mode: {blue(Activation_Mode)}")
     print(f"[INFO]|{current_time()}|Class_Subject: {blue(Class_Subject)}")
-
+    print(f"[INFO]|{current_time()}|{align_center()}")
+    begin_time = time.time()
     while True:
         print(f"[INFO]|{current_time()}|正在准备程序")
         # 创建浏览器对象
@@ -232,4 +235,6 @@ if __name__ == '__main__':
             sender(f"课程提醒", f"{' '.join(class_names)}")
         print(f"[INFO]|{current_time()}|已推送 {blue(' '.join(class_names))}")
         web.quit()
+        end_time = time.time()
+        print(f"[INFO]|{current_time()}|{align_center('用时' + blue('{:.2f}'.format(end_time - begin_time)) + 's')}")
         time.sleep(Push_cycle)
