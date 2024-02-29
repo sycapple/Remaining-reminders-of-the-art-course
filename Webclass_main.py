@@ -147,8 +147,8 @@ if __name__ == '__main__':
     print(f"[INFO]|{current_time()}|Activation_Mode: {blue(Activation_Mode)}")
     print(f"[INFO]|{current_time()}|Class_Subject: {blue(Class_Subject)}")
     print(f"[INFO]|{current_time()}|{align_center()}")
-    begin_time = time.time()
     while True:
+        begin_time = time.time()
         print(f"[INFO]|{current_time()}|正在准备程序")
         # 创建浏览器对象
         options = Options()
