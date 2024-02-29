@@ -34,6 +34,9 @@ WebVpn_Flag = False
 # 激活模式,没课时系统将不推送消息
 Activation_Mode = False
 
+# 调试模式
+Dev_Mode = True
+
 # 校公选课类别,如有需要,按以下表格填写
 Class_Subject = 0
 '''

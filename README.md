@@ -70,6 +70,7 @@
 * `Class_Subject`：公选课类别，选填
 * `WebVpn_Flag`：是否校外访问
 * `Auto_select`：是否自动选课(慎重选择，否则满足条件的都给你选上了)
+* `Dev_Mode`:调试模式
 
 ## 6. 项目运行
 

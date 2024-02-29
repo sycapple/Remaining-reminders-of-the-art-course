@@ -15,7 +15,12 @@ import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
 
-from config import *
+from config import Dev_Mode
+
+if Dev_Mode:
+    from config_test import *
+else:
+    from config import *
 
 
 def sender(title, content):
@@ -146,17 +151,21 @@ if __name__ == '__main__':
     print(f"[INFO]|{current_time()}|WebVpn_Flag: {blue(WebVpn_Flag)}")
     print(f"[INFO]|{current_time()}|Activation_Mode: {blue(Activation_Mode)}")
     print(f"[INFO]|{current_time()}|Class_Subject: {blue(Class_Subject)}")
+    print(f"[INFO]|{current_time()}|Dev_Mode: {blue(Dev_Mode)}")
     print(f"[INFO]|{current_time()}|{align_center()}")
     while True:
         begin_time = time.time()
         print(f"[INFO]|{current_time()}|正在准备程序")
         # 创建浏览器对象
         options = Options()
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        options.add_argument("--window-size=1920,1080")
-        options.add_argument("--start-maximized")
+        if Dev_Mode:
+            pass
+        else:
+            options.add_argument('--headless')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument("--window-size=1920,1080")
+            options.add_argument("--start-maximized")
         web = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         web.execute_cdp_cmd("Emulation.setUserAgentOverride", {
             "userAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0"
@@ -177,7 +186,7 @@ if __name__ == '__main__':
         pic_id = None
         while True:
             try:
-                web.find_element(by=By.XPATH, value='//*[@id="buttons"]/button[2]')
+                web.find_element(by=By.XPATH, value='//*[@id="courseBtn"]')
                 break
             except exceptions.NoSuchElementException as e:
                 img = web.find_element(by=By.XPATH, value='//*[@id="vcodeImg"]').screenshot_as_png
