@@ -121,10 +121,27 @@ def current_time():
 
 
 if __name__ == '__main__':
-    while True:
-        print(f"[INFO]|{current_time()}|欢迎来到课程搜集系统")
-        print(f"[INFO]|{current_time()}|正在准备程序")
+    print(f"[INFO]|{current_time()}|欢迎来到课程搜集系统")
+    print(f"[INFO]|{current_time()}|当前配置为")
+    print(f"[INFO]|{current_time()}|ACCOUNT: {blue(ACCOUNT)}")
+    print(f"[INFO]|{current_time()}|PASSWORD: {blue(PASSWORD)}")
+    print(f"[INFO]|{current_time()}|verify_code_ACCOUNT: {blue(verify_code_ACCOUNT)}")
+    print(f"[INFO]|{current_time()}|verify_code_PASSWORD: {blue(verify_code_PASSWORD)}")
+    print(f"[INFO]|{current_time()}|soft_id: {blue(soft_id)}")
+    print(f"[INFO]|{current_time()}|send_method(0:邮箱;1:bark;2:all): {blue(send_method)}")
+    print(f"[INFO]|{current_time()}|sender: {blue(my_sender)}")
+    print(f"[INFO]|{current_time()}|pass: {blue(my_pass)}")
+    print(f"[INFO]|{current_time()}|receiver: {blue(my_user)}")
+    print(f"[INFO]|{current_time()}|bark_api: {blue(bark_api)}")
+    print(f"[INFO]|{current_time()}|Pre-search field: {blue(className)}")
+    print(f"[INFO]|{current_time()}|Push_cycle: {blue(Push_cycle)}")
+    print(f"[INFO]|{current_time()}|Auto_select: {blue(Auto_select)}")
+    print(f"[INFO]|{current_time()}|WebVpn_Flag: {blue(WebVpn_Flag)}")
+    print(f"[INFO]|{current_time()}|Activation_Mode: {blue(Activation_Mode)}")
+    print(f"[INFO]|{current_time()}|Class_Subject: {blue(Class_Subject)}")
 
+    while True:
+        print(f"[INFO]|{current_time()}|正在准备程序")
         # 创建浏览器对象
         options = Options()
         options.add_argument('--headless')
@@ -147,9 +164,6 @@ if __name__ == '__main__':
             web.switch_to.window(web.window_handles[-1])
         else:
             web.get('https://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/index.do')
-        print(f"[INFO]|{current_time()}|当前登录信息如下")
-        print(f"[INFO]|{current_time()}|用户:{blue(ACCOUNT)}")
-        print(f"[INFO]|{current_time()}|密码:{blue(PASSWORD)}")
         web.find_element(by=By.XPATH, value='//*[@id="loginName"]').send_keys(ACCOUNT)
         web.find_element(by=By.XPATH, value='//*[@id="loginPwd"]').send_keys(PASSWORD)
         pic_id = None
@@ -189,7 +203,8 @@ if __name__ == '__main__':
         now_page = eval(web.find_element(by=By.XPATH, value='//*[@id="publicPageNumber"]').text)
         class_names = []
         if total_page == 0:
-            sender("课程提醒", "当前无课程")
+            if not Activation_Mode:
+                sender("课程提醒", "当前无课程")
             class_names.append("当前无课程")
         else:
             while now_page <= total_page:
