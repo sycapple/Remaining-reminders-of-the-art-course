@@ -132,7 +132,6 @@ if __name__ == '__main__':
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument("--window-size=1920,1080")
         options.add_argument("--start-maximized")
-        time.sleep(3)
         web = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         web.execute_cdp_cmd("Emulation.setUserAgentOverride", {
             "userAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0"
