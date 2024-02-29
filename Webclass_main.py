@@ -103,6 +103,8 @@ class Chaojiying_Client(object):
         r = requests.post('http://upload.chaojiying.net/Upload/ReportError.php', data=params, headers=self.headers)
         return r.json()
 
+def align_center(text):
+    return "{:—^50}".format(text)
 
 def red(text):
     return '\033[31m{}\033[0m'.format(text)
@@ -122,17 +124,20 @@ def current_time():
 
 if __name__ == '__main__':
     print(f"[INFO]|{current_time()}|欢迎来到课程搜集系统")
-    print(f"[INFO]|{current_time()}|当前配置为")
+    print(f"[INFO]|{current_time()}|{align_center('校园网账号配置')}")
     print(f"[INFO]|{current_time()}|ACCOUNT: {blue(ACCOUNT)}")
     print(f"[INFO]|{current_time()}|PASSWORD: {blue(PASSWORD)}")
+    print(f"[INFO]|{current_time()}|{align_center('超级鹰账号配置')}")
     print(f"[INFO]|{current_time()}|verify_code_ACCOUNT: {blue(verify_code_ACCOUNT)}")
     print(f"[INFO]|{current_time()}|verify_code_PASSWORD: {blue(verify_code_PASSWORD)}")
     print(f"[INFO]|{current_time()}|soft_id: {blue(soft_id)}")
+    print(f"[INFO]|{current_time()}|{align_center('推送配置')}")
     print(f"[INFO]|{current_time()}|send_method(0:邮箱;1:bark;2:all): {blue(send_method)}")
     print(f"[INFO]|{current_time()}|sender: {blue(my_sender)}")
     print(f"[INFO]|{current_time()}|pass: {blue(my_pass)}")
     print(f"[INFO]|{current_time()}|receiver: {blue(my_user)}")
     print(f"[INFO]|{current_time()}|bark_api: {blue(bark_api)}")
+    print(f"[INFO]|{current_time()}|{align_center('功能项配置')}")
     print(f"[INFO]|{current_time()}|Pre-search field: {blue(className)}")
     print(f"[INFO]|{current_time()}|Push_cycle: {blue(Push_cycle)}")
     print(f"[INFO]|{current_time()}|Auto_select: {blue(Auto_select)}")
