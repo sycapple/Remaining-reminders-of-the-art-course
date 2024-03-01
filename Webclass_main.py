@@ -148,7 +148,6 @@ if __name__ == '__main__':
     print(f"[INFO]|{current_time()}|Pre-search field: {blue(className)}")
     print(f"[INFO]|{current_time()}|Push_cycle: {blue(Push_cycle)}")
     print(f"[INFO]|{current_time()}|Auto_select: {blue(Auto_select)}")
-    print(f"[INFO]|{current_time()}|WebVpn_Flag: {blue(WebVpn_Flag)}")
     print(f"[INFO]|{current_time()}|Activation_Mode: {blue(Activation_Mode)}")
     print(f"[INFO]|{current_time()}|Class_Subject: {blue(Class_Subject)}")
     print(f"[INFO]|{current_time()}|Dev_Mode: {blue(Dev_Mode)}")
@@ -170,25 +169,26 @@ if __name__ == '__main__':
         web.execute_cdp_cmd("Emulation.setUserAgentOverride", {
             "userAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0"
         })
-        if WebVpn_Flag:
+        try:
             web.get('https://webvpn.bit.edu.cn/')
             print(f"[INFO]|{current_time()}|登录一体化认证")
             print(f"[INFO]|{current_time()}|进入选课网站")
             web.find_element(by=By.XPATH, value='//*[@id="username"]').send_keys(ACCOUNT)
             web.find_element(by=By.XPATH, value='//*[@id="password"]').send_keys(PASSWORD, Keys.ENTER)
-            time.sleep(1)
+            time.sleep(0.5)
             web.find_element(by=By.XPATH, value='//*[@id="group-8"]/div[2]/div').click()
             web.switch_to.window(web.window_handles[-1])
-        else:
+        except:
             web.get('https://xk.bit.edu.cn/xsxkapp/sys/xsxkapp/*default/index.do')
         web.find_element(by=By.XPATH, value='//*[@id="loginName"]').send_keys(ACCOUNT)
         web.find_element(by=By.XPATH, value='//*[@id="loginPwd"]').send_keys(PASSWORD)
         pic_id = None
         while True:
-            try:
-                web.find_element(by=By.XPATH, value='//*[@id="courseBtn"]')
+            if web.find_elements(by=By.XPATH, value='//*[@id="buttons"]/button[2]') or web.find_elements(by=By.XPATH,
+                                                                                                        value='//*[@id="courseBtn"]'):
                 break
-            except exceptions.NoSuchElementException as e:
+            else:
+                web.find_element(by=By.XPATH, value='//*[@id="vcodeImg"]')
                 img = web.find_element(by=By.XPATH, value='//*[@id="vcodeImg"]').screenshot_as_png
                 chaojiying = Chaojiying_Client(verify_code_ACCOUNT, verify_code_PASSWORD, soft_id)
                 if pic_id:
@@ -196,7 +196,7 @@ if __name__ == '__main__':
                     chaojiying.ReportError(pic_id)
                 dic = chaojiying.PostPic(img, 1902)
                 pic_id = dic['pic_id']
-                if dic['err_no'] == 1005:
+                if dic['err_no'] == -1005:
                     sender('题分不足', '题分不足')
                     print(f"[INFO]|{current_time()}|题分不足")
                     exit()
